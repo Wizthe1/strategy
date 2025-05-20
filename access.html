@@ -234,12 +234,13 @@
       await docRef.update({ used: true });
 
       if (data.courseType === "cheap") {
-        window.location.href = "lowlevel2.html";
-      } else if (data.courseType === "expensive") {
-        window.location.href = "highlevel.html";
-      } else {
-        alert("⚠️ Unknown course type. Contact support.");
-      }
+    window.location.href = "secureview5step.html?page=5steps";
+} else if (data.courseType === "expensive") {
+  window.location.href = "secureview5step.html?page=12steps";
+} else {
+  alert("⚠️ Unknown course type. Contact support.");
+}
+
     });
   </script>
 
