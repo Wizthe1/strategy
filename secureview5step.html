@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading...</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- Basic styles -->
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    #content h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <h2>Loading secure page...</h2>
+  </div>
+
+  <script>
+    // ✅ Your actual Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAB4kQqZ4jQ7F2xbbOETH50hVg2_FgeQoE",
+      authDomain: "crackllc-401c5.firebaseapp.com",
+      projectId: "crackllc-401c5",
+      storageBucket: "crackllc-401c5.firebasestorage.app",
+      messagingSenderId: "707790210993",
+      appId: "1:707790210993:web:eb5ad182e9020001091f90"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Load HTML securely from Firestore
+    async function loadSecureHTML(docId) {
+      try {
+        const doc = await db.collection("htmlPages").doc(docId).get();
+        if (!doc.exists) {
+          document.getElementById('content').innerHTML = "<h2>Page not found.</h2>";
+          return;
+        }
+        const html = doc.data().html;
+        document.open();
+        document.write(html);
+        document.close();
+      } catch (error) {
+        console.error(error);
+        document.getElementById('content').innerHTML = "<h2>Error loading page.</h2>";
+      }
+    }
+
+    // Load based on ?page=docId
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get("page");
+    if (page) {
+      loadSecureHTML(page);
+    } else {
+      document.getElementById('content').innerHTML = "<h2>Invalid request.</h2>";
+    }
+  </script>
+</body>
+</html>
