@@ -50,14 +50,13 @@
         }
         const html = doc.data().html;
         document.getElementById('content').innerHTML = html;
-        
       } catch (error) {
         console.error(error);
         document.getElementById('content').innerHTML = "<h2>Error loading page.</h2>";
       }
     }
 
-    // Load based on ?page=docId
+    // Load based on ?page=5steps or ?page=12steps
     const urlParams = new URLSearchParams(window.location.search);
     const page = urlParams.get("page");
     if (page) {
