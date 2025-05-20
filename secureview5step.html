@@ -49,9 +49,8 @@
           return;
         }
         const html = doc.data().html;
-        document.open();
-        document.write(html);
-        document.close();
+        document.getElementById('content').innerHTML = html;
+        
       } catch (error) {
         console.error(error);
         document.getElementById('content').innerHTML = "<h2>Error loading page.</h2>";
