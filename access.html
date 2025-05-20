@@ -214,7 +214,7 @@
   <script>
     document.getElementById("access-form").addEventListener("submit", async function (e) {
       e.preventDefault();
-      const code = this.accessCode.value.trim().toUpperCase();
+      const code = this.accessCode.value.trim();
 
       const docRef = db.collection("accessCodes").doc(code);
       const doc = await docRef.get();
