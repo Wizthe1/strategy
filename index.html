@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Advanced Operational Tactics</title>
+  <title>Earn More with DoorDash</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -21,6 +21,13 @@
       max-width: 1000px;
       margin: auto;
       padding: 60px 20px;
+    }
+
+
+    .container2 {
+      max-width: 1050px;
+      margin: auto;
+      padding: 20px 20px;
     }
 
     .top-bar {
@@ -100,6 +107,7 @@
       width: 100%;
       flex: 1;
       margin-top: 20px;
+      border-radius: 30px;
     }
 
     .button-group {
@@ -256,35 +264,42 @@
       text-decoration: underline;
     }
 
-    .learn-section {
-  display: flex;
-  justify-content: flex-start; /* Keep text on the left */
-  align-items: flex-start;
-  gap: 40px; /* Adjust spacing between text and image */
-  padding: 0 20px;
-}
+ .learn-section {
+      display: flex;
+      justify-content: flex-start; /* Keep text on the left */
+      align-items: flex-start;
+      gap: 80px; /* Adjust spacing between text and image */
+      padding: 0 20px;
+    }
+   
 
-.learn-text {
-  flex: 0 0 500px; /* Lock width of text block */
-}
+    .learn-text {
+      flex: 0 0 500px; /* Lock width of text block */
+    }
 
-.learn-image {
-  flex: 0 0 auto;
-  width: 200px;
-  margin-left: 60px; /* This moves the image closer to the center */
-}
+    .learn-image {
+      flex: 0 0 auto;
+      width: 200px;
+      margin-left: 60px; /* This moves the image closer to the center */
+    }
 
-.learn-image img {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    .learn-image img {
+      width: 100%;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-caption {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #333;
+    }
 
 
 
 
-
-    
   </style>
 </head>
 <body>
@@ -314,85 +329,93 @@
     </div>
   </header>
 
+<div class="container2">
   <div class="learn-section">
-  <div class="learn-text">
-    <h2>What You’ll Learn</h2>
-    <ul class="learn-list">
-      <li>Recognize high-quality order patterns</li>
-      <li>Reset your profile to escape bad-offer loops</li>
-      <li>Increase pay per mile and reduce wait time</li>
-      <li>Apply tactics tested by top drivers</li>
-    </ul>
-  </div>
-  <div class="learn-image">
-    <img src="Images/cards.png" alt="Offer Cards" />
+    <div class="learn-text">
+      <h2>What You’ll Learn</h2>
+      <ul class="learn-list">
+        <li>Recognize high-quality order patterns</li>
+        <li>Reset your profile to escape bad-offer loops</li>
+        <li>Increase pay per mile and reduce wait time</li>
+        <li>Apply tactics tested by top drivers</li>
+      </ul>
+    </div>
+    <div class="learn-image">
+      <img src="Images/cards.png" alt="Offer Cards" />
+      <p class="card-caption">Choose your cards right!</p>
+    </div>
   </div>
 </div>
 
-    <h2>Pricing Options</h2>
-    <div class="card">
-      <ul>
-        <li><strong>$10:</strong> Access the first 5 core tactics.</li>
-        <li><strong>$20:</strong> Unlock the full 12+ strategy system with bonus tips.</li>
-      </ul>
-    </div>
 
-    <h2>What Other Dashers Say (Top Comments)</h2>
-    <div class="testimonial">
-      <img src="Images/profile1.png" alt="User avatar">
-      <div class="testimonial-content">
-        I had no idea Doordash tracked behavior this deeply.
-        <strong>– Blacksburg</strong>
-      </div>
-    </div>
 
-    <div class="testimonial">
-      <img src="Images/profile2.png" alt="User avatar">
-      <div class="testimonial-content">
-        The profile reset trick completely changed the offers I was getting. Feels like I hacked the system.
-        <strong>– Roanoke</strong>
-      </div>
-    </div>
 
-    <div class="testimonial">
-      <img src="Images/profile3.png" alt="User avatar">
-      <div class="testimonial-content">
-        Every tactic is based on how the app actually works. You won’t find this on YouTube. Love it!
-        <strong>– Christiansburg</strong>
-      </div>
-    </div>
 
-    <h2>Add Your Review (Anonymous)</h2>
-    <form id="review-form" class="review-form">
-      <textarea id="review-text" rows="4" placeholder="Write your review here..." class="review-text"></textarea>
-      <div class="form-group">
-        <label>Choose Your Profile Picture:</label><br />
-        <input type="radio" id="avatar1" name="avatar" value="Images/profile1.png" checked>
-        <label for="avatar1">
-          <img src="Images/profile1.png" class="avatar-img" alt="Avatar 1" title="Avatar 1">
-        </label>
-        <input type="radio" id="avatar2" name="avatar" value="Images/profile2.png">
-        <label for="avatar2">
-          <img src="Images/profile2.png" class="avatar-img" alt="Avatar 2" title="Avatar 2">
-        </label>
-        <input type="radio" id="avatar3" name="avatar" value="Images/profile3.png">
-        <label for="avatar3">
-          <img src="Images/profile3.png" class="avatar-img" alt="Avatar 3" title="Avatar 3">
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="text" id="review-city" placeholder="Your city" class="review-city" />
-      </div>
-      <button type="submit" class="submit-btn">Submit Review</button>
-    </form>
-
-    <p class="trust-line">Built by a Top Dasher. Trusted by pros and beginners alike. Based in Blacksburg VA.</p>
-    <p class="trust-line">⚠️ Price increases soon – lock in early access for just $10/$20.</p>
+  <div class="container">
+  <h2>Pricing Options</h2>
+  <div class="card">
+    <ul>
+      <li><strong>$10:</strong> Access the first 5 core tactics.</li>
+      <li><strong>$20:</strong> Unlock the full 12+ strategy system with bonus tips.</li>
+    </ul>
   </div>
+
+  <h2>What Other Dashers Say</h2>
+  <div class="testimonial">
+    <img src="Images/profile1.png" alt="User avatar">
+    <div class="testimonial-content">
+      I had no idea DoorDash tracked behavior this deeply. Using just 3 of the tactics in this guide, I started earning $60–$80 more per week with fewer hours.
+      <strong>– Blacksburg</strong>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="Images/profile2.png" alt="User avatar">
+    <div class="testimonial-content">
+      The profile reset trick completely changed the offers I was getting. Feels like I hacked the system.
+      <strong>– Roanoke</strong>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="Images/profile3.png" alt="User avatar">
+    <div class="testimonial-content">
+      Every tactic is based on how the app actually works. You won’t find this on YouTube.
+      <strong>– Christiansburg</strong>
+    </div>
+  </div>
+
+  <h2>Add Your Review (anonymous)</h2>
+  <form id="review-form" class="review-form">
+    <textarea id="review-text" rows="4" placeholder="Write your review here..." class="review-text"></textarea>
+    <div class="form-group">
+      <label>Choose your profile picture:</label><br />
+      <input type="radio" id="avatar1" name="avatar" value="Images/profile1.png" checked>
+      <label for="avatar1">
+        <img src="Images/profile1.png" class="avatar-img" alt="Avatar 1" title="Avatar 1">
+      </label>
+      <input type="radio" id="avatar2" name="avatar" value="Images/profile2.png">
+      <label for="avatar2">
+        <img src="Images/profile2.png" class="avatar-img" alt="Avatar 2" title="Avatar 2">
+      </label>
+      <input type="radio" id="avatar3" name="avatar" value="Images/profile3.png">
+      <label for="avatar3">
+        <img src="Images/profile3.png" class="avatar-img" alt="Avatar 3" title="Avatar 3">
+      </label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="review-city" placeholder="Your city" class="review-city" />
+    </div>
+    <button type="submit" class="submit-btn">Submit Review</button>
+  </form>
+
+  <p class="trust-line">Built by a top Dasher. Trusted by pros and beginners alike. Based in Blacksburg VA.</p>
+  <p class="trust-line">⚠️ Price increases soon – lock in early access for just $10/$20.</p>
+</div>
 
   <footer>
     &copy; 2025 DashTactics LLC &middot;
-    <a href="mailto:ultrainfluenceteam@gmail.com">ultrainfluenceteam@gmail.com</a> &middot;
+    <a href="mailto:support@dashtactics.com">support@dashtactics.com</a> &middot;
     <a href="#">Refund Policy</a> &middot;
     <a href="#">Terms of Use</a>
   </footer>
