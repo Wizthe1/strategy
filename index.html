@@ -255,6 +255,36 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    .learn-section {
+  display: flex;
+  justify-content: flex-start; /* Keep text on the left */
+  align-items: flex-start;
+  gap: 40px; /* Adjust spacing between text and image */
+  padding: 0 20px;
+}
+
+.learn-text {
+  flex: 0 0 500px; /* Lock width of text block */
+}
+
+.learn-image {
+  flex: 0 0 auto;
+  width: 200px;
+  margin-left: 60px; /* This moves the image closer to the center */
+}
+
+.learn-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+    
   </style>
 </head>
 <body>
@@ -284,7 +314,8 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="learn-section">
+  <div class="learn-text">
     <h2>What You’ll Learn</h2>
     <ul class="learn-list">
       <li>Recognize high-quality order patterns</li>
@@ -292,6 +323,11 @@
       <li>Increase pay per mile and reduce wait time</li>
       <li>Apply tactics tested by top drivers</li>
     </ul>
+  </div>
+  <div class="learn-image">
+    <img src="Images/cards.png" alt="Offer Cards" />
+  </div>
+</div>
 
     <h2>Pricing Options</h2>
     <div class="card">
