@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Advanced Operational Tactics</title>
+  <title>Earn More with DoorDash</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     html, body {
@@ -297,6 +297,52 @@
       color: #333;
     }
 
+    /* === Refund Modal Styles === */
+#refund-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.refund-modal-content {
+  background: #fff;
+  padding: 30px;
+  max-width: 600px;
+  border-radius: 12px;
+  position: relative;
+  text-align: left;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.refund-modal-content h2 {
+  margin-top: 0;
+  color: #640000;
+}
+
+#close-refund {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #999;
+}
+
+#close-refund:hover {
+  color: #000;
+}
+
+
 
 
 
@@ -322,7 +368,7 @@
         <p>Master the techniques top drivers use to consistently earn $50–$100 more every day — without more hours, stress, or guesswork.</p>
         <div class="button-group">
           <button class="cta" onclick="window.location.href='lowlevel2.html'">Unlock Five Tactics – $10</button>
-          <button class="cta" onclick="window.location.href='highlevel.html'">Unlock Full System – $30</button>
+          <button class="cta" onclick="window.location.href='highlevel.html'">Unlock Full System – $20</button>
         </div>
       </div>
       <img src="Images/doordash-high-earnings.jpg" alt="Phone showing DoorDash earnings" class="hero-image" />
@@ -409,16 +455,31 @@
     <button type="submit" class="submit-btn">Submit Review</button>
   </form>
 
-  <p class="trust-line">Built by a Top Dasher. Trusted by Pros and Beginners Alike. Based in Blacksburg VA.</p>
-  <p class="trust-line">⚠️ Price Increases Soon – Lock in Early Access for Just $10/$30.</p>
+  <p class="trust-line">Built by a top Dasher. Trusted by pros and beginners alike. Based in Blacksburg VA.</p>
+  <p class="trust-line">⚠️ Price increases soon – lock in early access for just $10/$30.</p>
 </div>
 
   <footer>
     &copy; 2025 DashTactics LLC &middot;
     <a href="mailto:Ultrainfluenceteam@gmail.com">Ultrainfluenceteam@gmail.com</a> &middot;
-    <a href="#">Refund Policy</a> &middot;
+    <a href="#" id="refund-link">Refund Policy</a>
     <a href="#">Terms of Use</a>
   </footer>
+
+
+  
+  <!-- Refund Policy Modal -->
+<div id="refund-modal">
+  <div class="refund-modal-content">
+    <h2>Refund Policy</h2>
+    <p>
+      All purchases are final. Due to the instant access nature of digital content, we do not offer refunds once payment is processed. However, if you experience any technical issues or did not receive your access after payment, please email us at
+      <a href="mailto:Ultrainfluenceteam@gmail.com">Ultrainfluenceteam@gmail.com</a> and we will ensure your access is delivered.
+    </p>
+    <button id="close-refund">&times;</button>
+  </div>
+</div>
+
 
   <script>
     document.getElementById('review-form').addEventListener('submit', function(e) {
@@ -461,7 +522,32 @@
       document.querySelectorAll('.testimonial')[document.querySelectorAll('.testimonial').length - 1].after(container);
       document.getElementById('review-form').reset();
     });
+
+
+    // Refund modal logic
+    const refundModal = document.getElementById('refund-modal');
+    const refundLink = document.getElementById('refund-link');
+    const closeRefund = document.getElementById('close-refund');
+
+    refundLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      refundModal.style.display = 'flex';
+    });
+
+    closeRefund.addEventListener('click', function() {
+      refundModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(e) {
+      if (e.target === refundModal) refundModal.style.display = 'none';
+    });
+
+
+
   </script>
+
+  
+
 </body>
 </html>
 
