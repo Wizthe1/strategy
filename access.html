@@ -217,51 +217,52 @@
 
 <script>
   document.getElementById("access-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const code = this.accessCode.value.trim();
+  e.preventDefault();
+  const code = this.accessCode.value.trim();
 
+  const docRef = db.collection("accessCodes").doc(code);
+  const doc = await docRef.get();
+
+  if (!doc.exists) {
+    alert("❌ Invalid access code.");
+    return;
+  }
+
+  const data = doc.data();
+
+  // One-time use logic
+  if ("used" in data && data.used === true) {
+    alert("⚠️ This code has already been used.");
+    return;
+  }
+
+  // Expiration logic
+  const now = new Date();
+  const expiresAt = data.expiresAt?.toDate?.();
+  if (expiresAt && now > expiresAt) {
+    alert("⏳ This code has expired.");
+    return;
+  }
+
+  // ✅ Only mark as used if it's a one-time code
+  if ("used" in data && data.used === false) {
     try {
-      const docRef = db.collection("accessCodes").doc(code);
-      const doc = await docRef.get();
-
-      if (!doc.exists) {
-        alert("❌ Invalid access code.");
-        return;
-      }
-
-      const data = doc.data();
-
-      // ✅ Check if used (false or missing is OK)
-      if (data.used === true) {
-        alert("⚠️ This code has already been used.");
-        return;
-      }
-
-      // ✅ Check expiration (optional)
-      const now = new Date();
-      const expiresAt = data.expiresAt?.toDate?.();
-      if (expiresAt && now > expiresAt) {
-        alert("⏳ This code has expired.");
-        return;
-      }
-
-      // ✅ Mark code as used (even if field didn’t exist before)
       await docRef.update({ used: true });
-
-      // ✅ Redirect
-      if (data.courseType === "cheap") {
-        window.location.href = "secureview5step.html?page=5steps";
-      } else if (data.courseType === "expensive") {
-        window.location.href = "secureview5step.html?page=12steps";
-      } else {
-        alert("⚠️ Unknown course type. Contact support.");
-      }
-
     } catch (err) {
-      console.error("🔥 Error:", err);
-      alert("Something went wrong. Try again or contact support.");
+      console.error("Failed to mark as used:", err);
     }
-  });
+  }
+
+  // 🚀 Redirect
+  if (data.courseType === "cheap") {
+    window.location.href = "secureview5step.html?page=5steps";
+  } else if (data.courseType === "expensive") {
+    window.location.href = "secureview5step.html?page=12steps";
+  } else {
+    alert("⚠️ Unknown course type. Contact support.");
+  }
+});
+
 </script>
 
 
