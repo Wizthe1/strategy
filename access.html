@@ -215,7 +215,7 @@
     </div>
   </div>
 
- <script>
+<script>
   document.getElementById("access-form").addEventListener("submit", async function (e) {
     e.preventDefault();
     const code = this.accessCode.value.trim();
@@ -235,23 +235,18 @@
       return;
     }
 
-    // 🔒 Check expiration
+    // ✅ Check expiration only if field exists
     const now = new Date();
-    const expiresAt = data.expiresAt?.toDate?.(); // Protect against missing field
-    if (!expiresAt) {
-      alert("⚠️ Code is missing expiration date. Contact support.");
-      return;
-    }
-
-    if (now > expiresAt) {
+    const expiresAt = data.expiresAt?.toDate?.();
+    if (expiresAt && now > expiresAt) {
       alert("⏳ This code has expired.");
       return;
     }
 
-    // ✅ Mark as used (optional — remove if you want reusability during active period)
-    await docRef.update({ used: true });
+    // ✅ Optional: mark as used
+    // await docRef.update({ used: true });
 
-    // 🚀 Redirect based on course type
+    // 🚀 Redirect
     if (data.courseType === "cheap") {
       window.location.href = "secureview5step.html?page=5steps";
     } else if (data.courseType === "expensive") {
@@ -261,6 +256,7 @@
     }
   });
 </script>
+
 
 
 </body>
