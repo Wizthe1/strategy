@@ -215,38 +215,53 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("access-form").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const code = this.accessCode.value.trim();
+ <script>
+  document.getElementById("access-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const code = this.accessCode.value.trim();
 
-      const docRef = db.collection("accessCodes").doc(code);
-      const doc = await docRef.get();
+    const docRef = db.collection("accessCodes").doc(code);
+    const doc = await docRef.get();
 
-      if (!doc.exists) {
-        alert("❌ Invalid access code.");
-        return;
-      }
+    if (!doc.exists) {
+      alert("❌ Invalid access code.");
+      return;
+    }
 
-      const data = doc.data();
+    const data = doc.data();
 
-      if (data.used) {
-        alert("⚠️ This code has already been used.");
-        return;
-      }
+    if (data.used) {
+      alert("⚠️ This code has already been used.");
+      return;
+    }
 
-      await docRef.update({ used: true });
+    // 🔒 Check expiration
+    const now = new Date();
+    const expiresAt = data.expiresAt?.toDate?.(); // Protect against missing field
+    if (!expiresAt) {
+      alert("⚠️ Code is missing expiration date. Contact support.");
+      return;
+    }
 
-      if (data.courseType === "cheap") {
-    window.location.href = "secureview5step.html?page=5steps";
-} else if (data.courseType === "expensive") {
-  window.location.href = "secureview5step.html?page=12steps";
-} else {
-  alert("⚠️ Unknown course type. Contact support.");
-}
+    if (now > expiresAt) {
+      alert("⏳ This code has expired.");
+      return;
+    }
 
-    });
-  </script>
+    // ✅ Mark as used (optional — remove if you want reusability during active period)
+    await docRef.update({ used: true });
+
+    // 🚀 Redirect based on course type
+    if (data.courseType === "cheap") {
+      window.location.href = "secureview5step.html?page=5steps";
+    } else if (data.courseType === "expensive") {
+      window.location.href = "secureview5step.html?page=12steps";
+    } else {
+      alert("⚠️ Unknown course type. Contact support.");
+    }
+  });
+</script>
+
 
 </body>
 </html>
