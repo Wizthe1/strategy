@@ -220,6 +220,9 @@
   e.preventDefault();
   const code = this.accessCode.value.trim();
 
+  if (code === "182EHS192KK1") return window.location.href = "duplicate.html";
+
+
   const docRef = db.collection("accessCodes").doc(code);
   const doc = await docRef.get();
 
@@ -263,15 +266,7 @@
   }
 });
 
-
-const data = doc.data();
-
-// 🚨 Special redirect for fake leak code
-if (code === "182EHS192KK1") {
-  window.location.href = "duplicate.html";
-  return;
-}
-
+  
 
 </script>
 
