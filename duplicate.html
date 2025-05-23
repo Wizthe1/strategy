@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Access Denied</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #1f1f1f;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #ff4c4c;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .close-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #333;
+      color: #aaa;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: not-allowed;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Access Denied: Duplicate Attempt</h1>
+    <p>This code has already been used.<br />
+    This information is limited for a reason — the more it spreads, the less it works.<br /><br />
+    If you were meant to have it, you’ll know where to find it.
+    </p>
+    <button class="close-btn" disabled>Close</button>
+    <div class="note">Security Protocol: ULX-437</div>
+  </div>
+</body>
+</html>
