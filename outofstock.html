@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Access Temporarily Closed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 40px;
+      background-color: #1a1a1a;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 183, 255, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #4cd1ff;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .note {
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .limit-msg {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #87e8ff;
+    }
+
+    .ripple {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200vw;
+      height: 200vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 183, 255, 0.4), transparent 70%);
+      width: 200px;
+      height: 200px;
+      mix-blend-mode: screen;
+      transition: transform 0.05s linear;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="ripple">
+    <div class="circle" id="ripple-circle"></div>
+  </div>
+
+  <div class="container">
+    <h1>Access Temporarily Closed</h1>
+    <p>
+      We’ve paused access due to a spike in traffic.  
+      This system is built on insider-level tactics that only work when kept limited.  
+      New updates are being finalized and will be released soon.
+    </p>
+    <p class="limit-msg">
+      200 / 200 dashers currently use Ultrainfluence.<br />
+      We're sorry — you missed out.
+    </p>
+    <p class="note">
+      If you found this early, you’re already ahead. Stay close.
+    </p>
+  </div>
+
+  <script>
+    const ripple = document.getElementById('ripple-circle');
+    document.addEventListener('mousemove', (e) => {
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+    });
+  </script>
+</body>
+</html>
