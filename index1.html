@@ -171,7 +171,34 @@
       margin-bottom: 40px;
     }
 
-  .trust-section {
+ .early-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #232046;
+  margin-bottom: 10px;
+}
+
+.icon-badge {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.badge-early {
+  background: linear-gradient(90deg, #8f6eed 0%, #fbc2eb 100%);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 3px 12px;
+  margin-left: auto;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 8px rgba(140, 110, 220, 0.09);
+}
+
+.trust-section {
   background: linear-gradient(135deg, #f7f7fc 0%, #e9e6ff 100%);
   padding: 36px 32px;
   border-radius: 18px;
@@ -183,30 +210,43 @@
   overflow: hidden;
 }
 
-.trust-section-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1.25rem;
-  font-weight: 700;
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: #e0e0fa;
+  border-radius: 6px;
   margin-bottom: 16px;
+  overflow: hidden;
 }
 
-.trust-section-header .badge {
+.progress-bar {
+  height: 100%;
   background: linear-gradient(90deg, #8f6eed 0%, #fbc2eb 100%);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
+  width: 80%; /* Adjust this dynamically for real progress */
   border-radius: 6px;
-  padding: 4px 12px;
-  box-shadow: 0 2px 8px rgba(140, 110, 220, 0.08);
+  transition: width 0.5s cubic-bezier(.6,0,.4,1);
+}
+
+.trust-intro {
+  font-size: 1.05rem;
+  margin-bottom: 18px;
+}
+
+.trust-status {
+  color: #8f6eed;
+  font-weight: 600;
+  font-size: 0.98em;
+  background: #e0e0fa;
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-right: 6px;
 }
 
 .trust-points {
   list-style: none;
   padding-left: 0;
-  margin-top: 22px;
-  margin-bottom: 34px;
+  margin-top: 12px;
+  margin-bottom: 26px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -251,6 +291,9 @@
   text-align: center;
   line-height: 22px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .trust-points li:hover {
@@ -258,22 +301,32 @@
   box-shadow: 0 4px 18px rgba(140, 110, 220, 0.13);
 }
 
-.progress-bar-container {
-  width: 100%;
-  height: 8px;
-  background: #e0e0fa;
-  border-radius: 6px;
-  margin-top: 16px;
-  margin-bottom: 18px;
-  overflow: hidden;
+.trust-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 14px;
 }
 
-.progress-bar {
-  height: 100%;
+.trust-community {
+  font-size: 0.97em;
+  color: #8f6eed;
+  font-weight: 600;
+  background: #e0e0fa;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+
+.trust-badge {
   background: linear-gradient(90deg, #8f6eed 0%, #fbc2eb 100%);
-  width: 60%; /* Dynamically set based on progress */
+  color: #fff;
+  font-size: 0.92em;
+  font-weight: 600;
   border-radius: 6px;
-  transition: width 0.5s cubic-bezier(.6,0,.4,1);
+  padding: 3px 12px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px rgba(140, 110, 220, 0.08);
 }
 
 .faq-preview {
@@ -289,7 +342,6 @@
   font-weight: 600;
   letter-spacing: 0.02em;
 }
-
 
 
     .trust-line {
@@ -486,18 +538,34 @@
 
 
 
-    <h2>⚠️ You’re Early — Here's Why That Matters</h2>
+  <h2 class="early-header">
+  <span class="icon-badge">⚠️</span>
+  You’re Early — Here’s Why That Matters
+  <span class="badge-early">Early Access</span>
+</h2>
 
 <div class="trust-section">
-  <p>This site isn’t for everyone — and that’s by design.</p>
+  <div class="progress-bar-container">
+    <div class="progress-bar" style="width: 80%"></div>
+  </div>
+  <p class="trust-intro">
+    <span class="trust-status">Status: <strong>Insider</strong></span>
+    <br>
+    This site isn’t for everyone — and that’s by design.
+  </p>
   
   <ul class="trust-points">
-    <li><strong>Not advertised publicly.</strong> If you found this, it likely means you’re already thinking deeper than most.</li>
-    <li><strong>No bold promises.</strong> This strategy isn’t magic. It’s built on observed patterns in DoorDash’s algorithm — tested over 100+ hours of real-world dashing.</li>
-    <li><strong>No long-term guarantees.</strong> Like any system, things can change. That’s why the tactics are designed to work <em>right now</em>. And that window? It matters.</li>
+    <li class="completed"><strong>Not advertised publicly.</strong> If you found this, it likely means you’re already thinking deeper than most.</li>
+    <li class="completed"><strong>No bold promises.</strong> This strategy isn’t magic. It’s built on observed patterns in DoorDash’s algorithm — tested over 100+ hours of real-world dashing.</li>
+    <li class="completed"><strong>No long-term guarantees.</strong> Like any system, things can change. That’s why the tactics are designed to work <em>right now</em>. And that window? It matters.</li>
     <li><strong>We charge for a reason.</strong> Dashers are already underpaid. This guide exists to help flip that — not with fluff, but with ROI. It’s designed to pay for itself in under 48 hours. That’s the promise.</li>
     <li><strong>Think it sounds like a scam?</strong> Totally fair. That’s why there’s no flashy branding or big claims here. Just tactics that work — until they don’t.</li>
   </ul>
+
+  <div class="trust-footer">
+    <span class="trust-community">Trusted by <strong>1,200+ dashers</strong></span>
+    <span class="trust-badge">Verified Tactics</span>
+  </div>
 
   <div class="faq-preview">
     <h3>FAQ Preview</h3>
