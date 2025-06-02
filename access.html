@@ -217,6 +217,25 @@
   </div>
 
 <script>
+
+  document.getElementById("access-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const email = this.userEmail.value.trim();
+  const code = this.accessCode.value.trim();
+
+  // 📨 Save email to Firestore
+  try {
+    await db.collection("collectedEmails").add({
+      email: email,
+      accessCodeUsed: code,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } catch (err) {
+    console.error("Failed to save email:", err);
+  }
+
+  // 🔐 Continue with access code logic below...
+
   document.getElementById("access-form").addEventListener("submit", async function (e) {
   e.preventDefault();
   const code = this.accessCode.value.trim();
