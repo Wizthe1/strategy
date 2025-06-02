@@ -671,23 +671,25 @@
     });
 
 
-    // Refund modal logic
-    const refundModal = document.getElementById('refund-modal');
-    const refundLink = document.getElementById('refund-link');
-    const closeRefund = document.getElementById('close-refund');
+    document.addEventListener("DOMContentLoaded", function () {
+  const refundModal = document.getElementById('refund-modal');
+  const refundLink = document.getElementById('refund-link');
+  const closeRefund = document.getElementById('close-refund');
 
-    refundLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      refundModal.style.display = 'flex';
-    });
+  refundLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    refundModal.style.display = 'flex';
+  });
 
-    closeRefund.addEventListener('click', function() {
-      refundModal.style.display = 'none';
-    });
+  closeRefund.addEventListener('click', function() {
+    refundModal.style.display = 'none';
+  });
 
-    window.addEventListener('click', function(e) {
-      if (e.target === refundModal) refundModal.style.display = 'none';
-    });
+  window.addEventListener('click', function(e) {
+    if (e.target === refundModal) refundModal.style.display = 'none';
+  });
+});
+
 
 
 
