@@ -224,7 +224,9 @@
 <script>
   document.getElementById("email-form").addEventListener("submit", async function (e) {
     e.preventDefault();
-    const email = this.userEmail.value.trim().toLowerCase();
+    const rawEmail = this.userEmail.value;
+    const email = rawEmail.trim().toLowerCase();
+
 
     // 1. Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
