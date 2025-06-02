@@ -227,7 +227,6 @@
     const rawEmail = this.userEmail.value;
     const email = rawEmail.trim().toLowerCase();
 
-
     // 1. Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -235,31 +234,28 @@
       return;
     }
 
-    try {
-      // 2. Check for existing email
-      const existing = await db.collection("collectedEmails")
-        .where("email", "==", email)
-        .get();
+    // 2. Get device/browser info
+    const browserInfo = navigator.userAgent;
+    const screenSize = `${screen.width}x${screen.height}`;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-      if (!existing.empty) {
+    // 3. Save to Firestore using email as doc ID (prevents duplicates)
+    try {
+      const emailRef = db.collection("collectedEmails").doc(email);
+      const docSnap = await emailRef.get();
+
+      if (docSnap.exists) {
         alert("⚠️ This email has already been submitted.");
         return;
       }
 
-      // 3. Get device/browser info
-      const browserInfo = navigator.userAgent;
-      const screenSize = `${screen.width}x${screen.height}`;
-      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-      // 4. Save email to Firestore
-      await db.collection("collectedEmails").add({
-  email,
-  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-  browserInfo,
-  screenSize,
-  timezone
-});
-
+      await emailRef.set({
+        email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        browserInfo,
+        screenSize,
+        timezone
+      });
 
       alert("✅ Email submitted! Your code will be sent shortly.");
     } catch (err) {
@@ -285,13 +281,11 @@
 
     const data = doc.data();
 
-    // Prevent reuse
     if ("used" in data && data.used === true) {
       alert("⚠️ This code has already been used.");
       return;
     }
 
-    // Check expiration
     const now = new Date();
     const expiresAt = data.expiresAt?.toDate?.();
     if (expiresAt && now > expiresAt) {
@@ -299,7 +293,6 @@
       return;
     }
 
-    // Mark as used
     if ("used" in data && data.used === false) {
       try {
         await docRef.update({ used: true });
@@ -308,7 +301,6 @@
       }
     }
 
-    // Redirect based on course type
     if (data.courseType === "cheap") {
       window.location.href = "secureview5step.html?page=5steps";
     } else if (data.courseType === "expensive") {
