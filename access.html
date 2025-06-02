@@ -206,13 +206,18 @@
       <h2>Enter Your Access Code</h2>
       <p>Access the system behind top earners</p>
 
-      <form id="access-form">
-        <input type="email" name="userEmail" placeholder="Your email (we’ll send the code here)" required />
-        <input type="password" name="accessCode" placeholder="Your personal code here" required />
-        <button type="submit" class="signup-btn">
-          Unlock <span class="car">🚗</span>
-        </button>
-      </form>
+      <!-- Email Submission Form -->
+<form id="email-form" style="margin-bottom: 30px;">
+  <input type="email" name="userEmail" placeholder="Your email (we’ll send the code here)" required />
+  <button type="submit" class="signup-btn">Send Me the Code 📩</button>
+</form>
+
+<!-- Code Entry Form -->
+<form id="access-form">
+  <input type="password" name="accessCode" placeholder="Your personal code here" required />
+  <button type="submit" class="signup-btn">Unlock <span class="car">🚗</span></button>
+</form>
+
     </div>
   </div>
 
