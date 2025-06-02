@@ -222,16 +222,42 @@
   </div>
 
 <script>
-  // Save email
   document.getElementById("email-form").addEventListener("submit", async function (e) {
     e.preventDefault();
-    const email = this.userEmail.value.trim();
+    const email = this.userEmail.value.trim().toLowerCase();
+
+    // 1. Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("❌ Invalid email format.");
+      return;
+    }
 
     try {
+      // 2. Check for existing email
+      const existing = await db.collection("collectedEmails")
+        .where("email", "==", email)
+        .get();
+
+      if (!existing.empty) {
+        alert("⚠️ This email has already been submitted.");
+        return;
+      }
+
+      // 3. Get device/browser info
+      const browserInfo = navigator.userAgent;
+      const screenSize = `${screen.width}x${screen.height}`;
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      // 4. Save email to Firestore
       await db.collection("collectedEmails").add({
-        email: email,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        browserInfo,
+        screenSize,
+        timezone
       });
+
       alert("✅ Email submitted! Your code will be sent shortly.");
     } catch (err) {
       console.error("Failed to save email:", err);
@@ -239,7 +265,7 @@
     }
   });
 
-  // Process code
+  // 🔐 Process Access Code
   document.getElementById("access-form").addEventListener("submit", async function (e) {
     e.preventDefault();
     const code = this.accessCode.value.trim();
@@ -256,13 +282,13 @@
 
     const data = doc.data();
 
-    // One-time use logic
+    // Prevent reuse
     if ("used" in data && data.used === true) {
       alert("⚠️ This code has already been used.");
       return;
     }
 
-    // Expiration logic
+    // Check expiration
     const now = new Date();
     const expiresAt = data.expiresAt?.toDate?.();
     if (expiresAt && now > expiresAt) {
@@ -270,7 +296,7 @@
       return;
     }
 
-    // ✅ Only mark as used if it's a one-time code
+    // Mark as used
     if ("used" in data && data.used === false) {
       try {
         await docRef.update({ used: true });
@@ -279,7 +305,7 @@
       }
     }
 
-    // 🚀 Redirect
+    // Redirect based on course type
     if (data.courseType === "cheap") {
       window.location.href = "secureview5step.html?page=5steps";
     } else if (data.courseType === "expensive") {
@@ -289,6 +315,7 @@
     }
   });
 </script>
+
 
 
 
