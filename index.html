@@ -627,71 +627,31 @@
   </div>
 </div>
 
-
   <script>
-    document.getElementById('review-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const text = document.getElementById('review-text').value;
-      const city = document.getElementById('review-city').value;
-      const avatar = document.querySelector('input[name="avatar"]:checked').value;
+  document.addEventListener("DOMContentLoaded", function () {
+    // === REFUND MODAL ===
+    const refundModal = document.getElementById('refund-modal');
+    const refundLink = document.getElementById('refund-link');
+    const closeRefund = document.getElementById('close-refund');
 
-      if (!text.trim()) return alert("Please write a review.");
+    if (refundLink && refundModal && closeRefund) {
+      refundLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        refundModal.style.display = 'flex';
+      });
 
-      const container = document.createElement('div');
-      container.className = 'testimonial';
+      closeRefund.addEventListener('click', function() {
+        refundModal.style.display = 'none';
+      });
 
-      const img = document.createElement('img');
-      img.src = avatar;
-      img.style.width = '36px';
-      img.style.height = '36px';
-      img.style.borderRadius = '50%';
-
-      const content = document.createElement('div');
-      content.className = 'testimonial-content';
-      content.innerHTML = `${text}<strong> – ${city || 'Anonymous'}</strong>`;
-
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete';
-      deleteBtn.style.marginTop = '8px';
-      deleteBtn.style.padding = '6px 10px';
-      deleteBtn.style.fontSize = '0.8rem';
-      deleteBtn.style.border = 'none';
-      deleteBtn.style.borderRadius = '4px';
-      deleteBtn.style.backgroundColor = '#e0e0e0';
-      deleteBtn.style.cursor = 'pointer';
-
-      deleteBtn.onclick = () => container.remove();
-
-      content.appendChild(deleteBtn);
-      container.appendChild(img);
-      container.appendChild(content);
-
-      document.querySelectorAll('.testimonial')[document.querySelectorAll('.testimonial').length - 1].after(container);
-      document.getElementById('review-form').reset();
-    });
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-  const refundModal = document.getElementById('refund-modal');
-  const refundLink = document.getElementById('refund-link');
-  const closeRefund = document.getElementById('close-refund');
-
-  refundLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    refundModal.style.display = 'flex';
+      window.addEventListener('click', function(e) {
+        if (e.target === refundModal) {
+          refundModal.style.display = 'none';
+        }
+      });
+    }
   });
-
-  closeRefund.addEventListener('click', function() {
-    refundModal.style.display = 'none';
-  });
-
-  window.addEventListener('click', function(e) {
-    if (e.target === refundModal) refundModal.style.display = 'none';
-  });
-});
-
-
-
+</script>
 
   </script>
 
