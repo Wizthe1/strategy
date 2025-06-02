@@ -234,14 +234,16 @@
       return;
     }
 
-    // 2. Get device/browser info
+    // 2. Sanitize email to use as Firestore doc ID
+    const safeEmailId = email.replace(/\./g, '_dot_').replace(/@/g, '_at_');
+
+    // 3. Get device/browser info
     const browserInfo = navigator.userAgent;
     const screenSize = `${screen.width}x${screen.height}`;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    // 3. Save to Firestore using email as doc ID (prevents duplicates)
     try {
-      const emailRef = db.collection("collectedEmails").doc(email);
+      const emailRef = db.collection("collectedEmails").doc(safeEmailId);
       const docSnap = await emailRef.get();
 
       if (docSnap.exists) {
@@ -257,14 +259,14 @@
         timezone
       });
 
-      alert("✅ Email submitted! Your code will be sent shortly.");
+      alert("✅ Email submitted! We’ll send you the access code shortly.");
     } catch (err) {
       console.error("Failed to save email:", err);
-      alert("❌ Error saving email.");
+      alert("❌ Error saving email. Try again later.");
     }
   });
 
-  // 🔐 Process Access Code
+  // 🔐 Access code form (unchanged logic)
   document.getElementById("access-form").addEventListener("submit", async function (e) {
     e.preventDefault();
     const code = this.accessCode.value.trim();
