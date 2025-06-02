@@ -251,6 +251,13 @@
         return;
       }
 
+      console.log("Trying to save:", {
+  email,
+  browserInfo,
+  screenSize,
+  timezone
+});
+
       await emailRef.set({
         email,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
