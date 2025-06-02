@@ -260,10 +260,11 @@
       });
 
       alert("✅ Email submitted! We’ll send you the access code shortly.");
-    } catch (err) {
-      console.error("Failed to save email:", err);
-      alert("❌ Error saving email. Try again later.");
-    }
+   } catch (err) {
+  console.error("Detailed Firestore error:", err);
+  alert("❌ Error saving email: " + err.message);
+}
+
   });
 
   // 🔐 Access code form (unchanged logic)
