@@ -222,78 +222,74 @@
   </div>
 
 <script>
+  // Save email
+  document.getElementById("email-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const email = this.userEmail.value.trim();
 
-  document.getElementById("access-form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const email = this.userEmail.value.trim();
-  const code = this.accessCode.value.trim();
-
-  // 📨 Save email to Firestore
-  try {
-    await db.collection("collectedEmails").add({
-      email: email,
-      accessCodeUsed: code,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-  } catch (err) {
-    console.error("Failed to save email:", err);
-  }
-
-  // 🔐 Continue with access code logic below...
-
-  document.getElementById("access-form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const code = this.accessCode.value.trim();
-
-  if (code === "182EHS192KK1") return window.location.href = "duplicate.html";
-
-
-  const docRef = db.collection("accessCodes").doc(code);
-  const doc = await docRef.get();
-
-  if (!doc.exists) {
-    alert("❌ Invalid access code.");
-    return;
-  }
-
-  const data = doc.data();
-
-  // One-time use logic
-  if ("used" in data && data.used === true) {
-    alert("⚠️ This code has already been used.");
-    return;
-  }
-
-  // Expiration logic
-  const now = new Date();
-  const expiresAt = data.expiresAt?.toDate?.();
-  if (expiresAt && now > expiresAt) {
-    alert("⏳ This code has expired.");
-    return;
-  }
-
-  // ✅ Only mark as used if it's a one-time code
-  if ("used" in data && data.used === false) {
     try {
-      await docRef.update({ used: true });
+      await db.collection("collectedEmails").add({
+        email: email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      alert("✅ Email submitted! Your code will be sent shortly.");
     } catch (err) {
-      console.error("Failed to mark as used:", err);
+      console.error("Failed to save email:", err);
+      alert("❌ Error saving email.");
     }
-  }
+  });
 
-  // 🚀 Redirect
-  if (data.courseType === "cheap") {
-    window.location.href = "secureview5step.html?page=5steps";
-  } else if (data.courseType === "expensive") {
-    window.location.href = "secureview5step.html?page=12steps";
-  } else {
-    alert("⚠️ Unknown course type. Contact support.");
-  }
-});
+  // Process code
+  document.getElementById("access-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const code = this.accessCode.value.trim();
 
-  
+    if (code === "182EHS192KK1") return window.location.href = "duplicate.html";
 
+    const docRef = db.collection("accessCodes").doc(code);
+    const doc = await docRef.get();
+
+    if (!doc.exists) {
+      alert("❌ Invalid access code.");
+      return;
+    }
+
+    const data = doc.data();
+
+    // One-time use logic
+    if ("used" in data && data.used === true) {
+      alert("⚠️ This code has already been used.");
+      return;
+    }
+
+    // Expiration logic
+    const now = new Date();
+    const expiresAt = data.expiresAt?.toDate?.();
+    if (expiresAt && now > expiresAt) {
+      alert("⏳ This code has expired.");
+      return;
+    }
+
+    // ✅ Only mark as used if it's a one-time code
+    if ("used" in data && data.used === false) {
+      try {
+        await docRef.update({ used: true });
+      } catch (err) {
+        console.error("Failed to mark as used:", err);
+      }
+    }
+
+    // 🚀 Redirect
+    if (data.courseType === "cheap") {
+      window.location.href = "secureview5step.html?page=5steps";
+    } else if (data.courseType === "expensive") {
+      window.location.href = "secureview5step.html?page=12steps";
+    } else {
+      alert("⚠️ Unknown course type. Contact support.");
+    }
+  });
 </script>
+
 
 
 
