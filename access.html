@@ -165,22 +165,15 @@
       transform: scale(1.03);
     }
 
- .email-form .input-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-}
-
-.email-form input[type="email"] {
+   input[type="email"] {
   width: 100%;
   padding: 14px 40px 14px 30px;
-  font-size: 1rem;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  font-size: 1rem;
   box-sizing: border-box;
 }
-
 
 
     @media screen and (max-width: 768px) {
@@ -225,17 +218,10 @@
       <p>Access the system behind top earners</p>
 
       <!-- Email Submission Form -->
-<form id="email-form" class="email-form">
-  <div class="input-wrap">
-    <input type="email" name="userEmail" placeholder="Your email (we’ll send the code here)" required />
-    <button type="submit" class="signup-btn">Send Me the Code </button>
-  </div>
+<form id="email-form" style="margin-bottom: 30px;">
+  <input type="email" name="userEmail" placeholder="Your email (we’ll send the code here)" required />
+  <button type="submit" class="signup-btn">Send Me the Code 📩</button>
 </form>
-      
-<p style="font-size: 0.7rem; color: #888; margin-top: 8px;">
-  By submitting, you agree to our <a href="/privacy.html" style="color: #888; text-decoration: underline;">Privacy Policy</a>.
-</p>
-
 
 <!-- Code Entry Form -->
 <form id="access-form">
@@ -264,7 +250,7 @@
 
     // 3. Get device/browser info
     const browserInfo = navigator.userAgent;
-    const screenSize = `${screen.width}x${screen.height}`;
+    const screenSize = ${screen.width}x${screen.height};
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     try {
