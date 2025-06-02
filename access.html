@@ -253,12 +253,13 @@
 
       // 4. Save email to Firestore
       await db.collection("collectedEmails").add({
-        email,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        browserInfo,
-        screenSize,
-        timezone
-      });
+  email,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  browserInfo,
+  screenSize,
+  timezone
+});
+
 
       alert("✅ Email submitted! Your code will be sent shortly.");
     } catch (err) {
